@@ -1,0 +1,14 @@
+{
+  "name": "webflow-helpers",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:momentechnologies/webflow-helpers.git",
+  "author": "Max Moeschinger <max@momentech.no>",
+  "license": "MIT",
+  "peerDependencies": {
+    "axios": "^0.21.1"
+  },
+  "devDependencies": {
+    "axios": "^0.21.1"
+  }
+}
