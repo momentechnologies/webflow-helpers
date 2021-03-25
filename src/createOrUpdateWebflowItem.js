@@ -43,6 +43,7 @@ const create = async (config, webflowCollection, data, depth = 0) => {
             depth <= 5 &&
             e.response &&
             e.response.data.code === 400 &&
+            e.response.data.problem_data &&
             e.response.data.problem_data.length !== 0 &&
             e.response.data.problem_data[0].slug === 'slug'
         ) {
@@ -51,7 +52,7 @@ const create = async (config, webflowCollection, data, depth = 0) => {
                     depth + 2
                 }`
             );
-            await create(webflowCollection, data, depth + 1);
+            await create(config, webflowCollection, data, depth + 1);
         } else {
             throw e;
         }

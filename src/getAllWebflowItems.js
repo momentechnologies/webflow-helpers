@@ -15,7 +15,7 @@ const getAllWebflowItems = async (config, collection, items = []) => {
         return items;
     }
 
-    return getAllWebflowItems(collection, items);
+    return getAllWebflowItems(config, collection, items);
 };
 
 module.exports = getAllWebflowItems;
