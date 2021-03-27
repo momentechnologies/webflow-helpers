@@ -11,5 +11,8 @@
   "devDependencies": {
     "axios": "^0.21.1",
     "prettier": "^2.2.1"
+  },
+  "dependencies": {
+    "bottleneck": "^2.19.5"
   }
 }
