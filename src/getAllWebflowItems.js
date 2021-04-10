@@ -1,8 +1,5 @@
-const request = require('./request.js');
-
-const getAllWebflowItems = async (config, collection, items = []) => {
+const getAllWebflowItems = async (request, collection, items = []) => {
     const response = await request(
-        config,
         `/collections/${collection}/items?limit=3&offset=${items.length}`,
         'GET'
     );
@@ -15,7 +12,7 @@ const getAllWebflowItems = async (config, collection, items = []) => {
         return items;
     }
 
-    return getAllWebflowItems(config, collection, items);
+    return getAllWebflowItems(request, collection, items);
 };
 
 module.exports = getAllWebflowItems;
