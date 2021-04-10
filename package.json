@@ -1,6 +1,6 @@
 {
   "name": "webflow-helpers",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "src/webflowHelper.js",
   "repository": "git@github.com:momentechnologies/webflow-helpers.git",
   "author": "Max Moeschinger <max@momentech.no>",
