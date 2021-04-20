@@ -44,7 +44,7 @@ const create = async (webflow, webflowCollectionId, data, depth = 0) => {
                     depth + 2
                 }`
             );
-            await create(webflow, webflowCollectionId, data, depth + 1);
+            return await create(webflow, webflowCollectionId, data, depth + 1);
         } else {
             throw e;
         }
