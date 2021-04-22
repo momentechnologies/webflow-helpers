@@ -22,13 +22,15 @@ const request = async (config, path, method, options = {}) => {
         });
     } catch (e) {
         if (e.response && e.response.status === 429) {
-            console.log('ratelimit hit. Going to cooldown');
-            console.log({
-                limit: parseInt(e.response.headers['x-ratelimit-limit']),
-                remaining: parseInt(
-                    e.response.headers['x-ratelimit-remaining']
-                ),
-            });
+            if (config.debug) {
+                console.log('ratelimit hit. Going to cooldown');
+                console.log({
+                    limit: parseInt(e.response.headers['x-ratelimit-limit']),
+                    remaining: parseInt(
+                        e.response.headers['x-ratelimit-remaining']
+                    ),
+                });
+            }
             await delay(cooldownRatelimitSeconds * 1000);
             return await request(config, path, method, options);
         }

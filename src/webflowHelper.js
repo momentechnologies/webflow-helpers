@@ -36,7 +36,11 @@ module.exports = class WebflowHelper {
     }
 
     async deleteItem({ collectionId, itemId }) {
-        console.log(`Deleting item ${itemId} from collection ${collectionId}`);
+        if (this.config.debug) {
+            console.log(
+                `Deleting item ${itemId} from collection ${collectionId}`
+            );
+        }
         const response = await this.authenticatedRequest(
             `/collections/${collectionId}/items/${itemId}?live=true`,
             'DELETE'

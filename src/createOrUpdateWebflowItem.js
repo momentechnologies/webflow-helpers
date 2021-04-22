@@ -39,11 +39,13 @@ const create = async (webflow, webflowCollectionId, data, depth = 0) => {
             e.response.data.problem_data.length !== 0 &&
             e.response.data.problem_data[0].slug === 'slug'
         ) {
-            console.log(
-                `Slug "${slug} already exists for collection ${webflowCollectionId}. Going to depth ${
-                    depth + 2
-                }`
-            );
+            if (webflow.config.debug) {
+                console.log(
+                    `Slug "${slug} already exists for collection ${webflowCollectionId}. Going to depth ${
+                        depth + 2
+                    }`
+                );
+            }
             return await create(webflow, webflowCollectionId, data, depth + 1);
         } else {
             throw e;
@@ -62,14 +64,18 @@ const createOrUpdateWebflowItem = async (
 
     if (existing) {
         if (shouldUpdateFn && !shouldUpdateFn(webflowItemToUpdate, existing)) {
-            console.log(
-                `Found existing webflow item for collection ${webflowCollectionId}. Not updating since shouldUpdateFn is false`
-            );
+            if (webflow.config.debug) {
+                console.log(
+                    `Found existing webflow item for collection ${webflowCollectionId}. Not updating since shouldUpdateFn is false`
+                );
+            }
             return existing;
         } else {
-            console.log(
-                `Found existing webflow item for collection ${webflowCollectionId}. Updating ${existing._id}`
-            );
+            if (webflow.config.debug) {
+                console.log(
+                    `Found existing webflow item for collection ${webflowCollectionId}. Updating ${existing._id}`
+                );
+            }
         }
         return webflow.updateItem({
             collectionId: webflowCollectionId,
@@ -83,9 +89,11 @@ const createOrUpdateWebflowItem = async (
         });
     }
 
-    console.log(
-        `New webflow item for collection ${webflowCollectionId} with name ${webflowItemToUpdate.name}`
-    );
+    if (webflow.config.debug) {
+        console.log(
+            `New webflow item for collection ${webflowCollectionId} with name ${webflowItemToUpdate.name}`
+        );
+    }
 
     return await create(webflow, webflowCollectionId, webflowItemToUpdate);
 };
