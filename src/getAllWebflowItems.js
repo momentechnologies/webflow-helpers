@@ -1,6 +1,6 @@
 const getAllWebflowItems = async (request, collection, items = []) => {
     const response = await request(
-        `/collections/${collection}/items?limit=500&offset=${items.length}`,
+        `/collections/${collection}/items?limit=100&offset=${items.length}`,
         'GET'
     );
 
