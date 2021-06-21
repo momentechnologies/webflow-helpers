@@ -17,7 +17,13 @@ const createSlug = (name, depth) => {
     return `${rawSlug}-${depth + 1}`;
 };
 
-const create = async (webflow, webflowCollectionId, data, depth = 0) => {
+const create = async (
+    webflow,
+    webflowCollectionId,
+    data,
+    autoCreateSlugOnFailure = true,
+    depth = 0
+) => {
     const slug = createSlug(data.name, depth);
 
     try {
@@ -32,6 +38,7 @@ const create = async (webflow, webflowCollectionId, data, depth = 0) => {
         });
     } catch (e) {
         if (
+            autoCreateSlugOnFailure &&
             depth <= 5 &&
             e.response &&
             e.response.data.code === 400 &&
@@ -58,7 +65,8 @@ const createOrUpdateWebflowItem = async (
     webflowCollectionId,
     webflowItemToUpdate,
     getExisting,
-    shouldUpdateFn = null
+    shouldUpdateFn = null,
+    autoCreateSlugOnFailure = true
 ) => {
     const existing = getExisting(webflowItemToUpdate);
 
@@ -95,7 +103,12 @@ const createOrUpdateWebflowItem = async (
         );
     }
 
-    return await create(webflow, webflowCollectionId, webflowItemToUpdate);
+    return await create(
+        webflow,
+        webflowCollectionId,
+        webflowItemToUpdate,
+        autoCreateSlugOnFailure
+    );
 };
 
 module.exports = createOrUpdateWebflowItem;
