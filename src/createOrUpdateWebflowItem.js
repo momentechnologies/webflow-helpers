@@ -27,7 +27,7 @@ const create = async (
     const slug = createSlug(data.name, depth);
 
     try {
-        return await webflow.createItem({
+        const response = await webflow.createItem({
             collectionId: webflowCollectionId,
             fields: {
                 _archived: false,
@@ -36,6 +36,16 @@ const create = async (
                 slug,
             },
         });
+
+        if (response.slug !== slug) {
+            if (webflow.config.debug) {
+                console.log(
+                    `Create new webflow item for collection ${webflowCollectionId} with slug ${slug} returned different slug ${response.slug}`
+                );
+            }
+        }
+
+        return response;
     } catch (e) {
         if (
             autoCreateSlugOnFailure &&
