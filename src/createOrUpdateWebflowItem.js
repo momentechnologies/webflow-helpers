@@ -63,7 +63,7 @@ const create = async (
                     }`
                 );
             }
-            return await create(webflow, webflowCollectionId, data, depth + 1);
+            return await create(webflow, webflowCollectionId, data, autoCreateSlugOnFailure, depth + 1);
         } else {
             throw e;
         }
