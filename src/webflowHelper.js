@@ -13,7 +13,7 @@ module.exports = class WebflowHelper {
 
     async updateItem({ collectionId, itemId, ...data }) {
         const response = await this.authenticatedRequest(
-            `/collections/${collectionId}/items/${itemId}`,
+            `/collections/${collectionId}/items/${itemId}?live=true`,
             'PUT',
             {
                 data,
